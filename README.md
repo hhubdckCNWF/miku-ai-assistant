@@ -1,23 +1,32 @@
 # Miku — Personal AI Operating Layer
 
-Local-first personal AI assistant with secure session access, tool-augmented reasoning, and a real-time operator HUD.
+Local-first personal AI assistant for the desktop. Miku combines secure access, conversational intelligence, tool-augmented actions, and a real-time operator HUD in one runtime.
 
-## Features
-- LLM dialogue (Gemini) with intent routing and memory
-- Biometric face auth + PIN fallback
-- Tools: scientific calculator, weather, search, system metrics
-- Desktop command layer (apps / system actions)
-- FastAPI + WebSocket backend, HTML/CSS/JS HUD client
-- Voice replies (TTS)
+**Status:** Ongoing development — core runtime, security gate, tool routers, and HUD are integrated; features are being hardened iteratively.
 
-## Stack
-Python · FastAPI · WebSocket · JavaScript · HTML/CSS · Gemini API · OpenCV / face auth · TTS
+---
 
-## Status
-**Ongoing** — core runtime, security gate, tool routers, and HUD integrated.
+## What Miku does
 
-## Screenshots
-<!-- baad mein images/ folder se add karna -->
+- **Conversational AI** — Gemini-backed dialogue with intent routing, long-term memory, and bilingual (Hindi / English) replies  
+- **Secure session** — Face authentication with PIN fallback before privileged use  
+- **Operator HUD** — Futuristic web UI: boot → security → main dashboard (FastAPI + WebSocket)  
+- **Tools** — Scientific calculator engines, live weather, web search, system metrics (CPU / RAM / disk)  
+- **Desktop control** — Open/close apps and common system actions via text or voice-driven commands  
+- **Voice** — TTS replies aligned with on-screen responses  
 
-## Note
-Private keys (`.env`, API keys) are **not** included in this repository.
+---
+
+## Architecture (high level)
+
+```text
+Browser HUD (HTML/CSS/JS)
+        │  HTTP + WebSocket
+        ▼
+FastAPI app (app.py)
+        │
+        ├── MikuBridge          → chat, memory, personality, TTS
+        ├── Security            → face auth / PIN session
+        ├── Tool / Intent routers → calculator, search, commands
+        ├── Search engine       → weather, general lookup
+        └── Desktop / system control
